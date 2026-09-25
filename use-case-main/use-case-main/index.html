@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where in AUF? - Campus Map & Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --auf-blue: #002B66;
+    --auf-blue-light: #004499;
+    --auf-blue-dark: #001A3E;
+    --auf-gold: #FFC72C;
+    --bg-light: #F4F7FA;
+    --card-bg: #FFFFFF;
+    --text-main: #1C2833;
+    --text-muted: #566573;
+    --border-color: #D5DBDB;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg-light);
+    color: var(--text-main);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.5;
+  }
+
+  header {
+    background: var(--auf-blue-dark);
+    color: #FFFFFF;
+    padding: 20px;
+    border-bottom: 5px solid var(--auf-gold);
+  }
+  .header-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .wordmark-logo-img {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(30px, 5vw, 42px);
+    margin: 0;
+    color: #FFFFFF;
+    letter-spacing: 0.5px;
+  }
+  h1 span { color: var(--auf-gold); }
+  .tagline {
+    font-size: 14px;
+    color: #D0E1F9;
+    margin: 0;
+  }
+
+  main {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 960px) {
+    main { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 43, 102, 0.05);
+  }
+
+  .ask-panel { padding: 22px; }
+  
+  details.directory {
+    margin-bottom: 18px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: #F8FAFC;
+  }
+  details.directory summary {
+    cursor: pointer;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--auf-blue);
+    user-select: none;
+  }
+  #context {
+    width: 100%;
+    min-height: 200px;
+    padding: 12px;
+    border: none;
+    border-top: 1px solid var(--border-color);
+    background: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    color: var(--text-main);
+    resize: vertical;
+    line-height: 1.5;
+  }
+
+  .ask-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  #question {
+    flex: 1;
+    padding: 12px 14px;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14.5px;
+    color: var(--text-main);
+  }
+  #question:focus {
+    outline: none;
+    border-color: var(--auf-blue-light);
+  }
+  button#ask {
+    background: var(--auf-blue);
+    color: #FFFFFF;
+    border: none;
+    padding: 0 20px;
+    border-radius: 6px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    cursor: pointer;
+  }
+  button#ask:hover { background: var(--auf-blue-light); }
+  button#ask:disabled { background: #A0AEC0; cursor: wait; }
+
+  .examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .examples button {
+    background: #EBF3FF;
+    border: 1px solid #C2DCFF;
+    border-radius: 16px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--auf-blue);
+    cursor: pointer;
+  }
+  .examples button:hover {
+    background: var(--auf-blue);
+    color: #FFFFFF;
+  }
+
+  #status {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    min-height: 18px;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .answer-card {
+    border-left: 5px solid var(--auf-blue);
+    background: #F0F5FF;
+    padding: 16px 18px;
+    border-radius: 6px;
+    display: none;
+  }
+  .answer-card.show { display: block; }
+  .answer-card .location-header {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--auf-blue);
+    margin-bottom: 8px;
+  }
+  .answer-card .details {
+    font-size: 14.5px;
+    color: var(--text-main);
+    line-height: 1.5;
+  }
+  .answer-card .details p { margin: 4px 0; }
+  .answer-card .details ul { margin: 4px 0 0 18px; padding: 0; }
+
+  /* Map Styling */
+  .map-panel {
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    padding: 18px;
+    position: sticky;
+    top: 20px;
+  }
+  .map-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    border-bottom: 2px solid var(--bg-light);
+    padding-bottom: 8px;
+  }
+  .map-title span.label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    color: var(--auf-blue);
+  }
+  .map-title span.showing {
+    font-size: 12px;
+    color: var(--auf-blue-light);
+    font-weight: 600;
+  }
+  
+  svg#campusmap { width: 100%; height: auto; display: block; background: #F8FAFC; border-radius: 6px; border: 1px solid #E2E8F0; }
+  
+  .bldg rect, .bldg polygon {
+    stroke: #FFFFFF;
+    stroke-width: 1.5;
+    transition: all 0.3s ease;
+  }
+  .bldg text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    pointer-events: none;
+  }
+  .bldg.active rect, .bldg.active polygon {
+    stroke: var(--auf-gold) !important;
+    stroke-width: 3.5 !important;
+    filter: drop-shadow(0 0 6px rgba(0, 43, 102, 0.4));
+  }
+
+  .legend {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="wordmark">
+      <img src="AUF LOGO (1).png" alt="AUF Seal" class="wordmark-logo-img">
+      <h1>Where in <span>AUF</span>?</h1>
+    </div>
+    <p class="tagline">Official Angeles University Foundation Quick Campus Directory & Map</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- ASK PANEL -->
+  <section class="panel ask-panel">
+    <details class="directory">
+      <summary>Campus Directory Data (Editable Context)</summary>
+      <textarea id="context">A Building / Angeles Hall:
+- Guidance Counselor Office (Main): Room A-303, AUF Main A Building.
+- Office of Student Affairs (OSAFA): 2nd Floor, A Building.
+- Office of the Vice President for Research and Innovation (OVPRI): 1st Floor, A Building.
+- Office of the University Registrar and Admissions: Rooms A-202 & A-203, 2nd Floor, A Building.
+- Admissions Office Window: Room A-310, 3rd Floor, A Building.
+- AUF Cashier / Accounting Office: Ground Floor, Angeles Hall (Beside Our Lady of Grace Chapel).
+- Management Information Systems and Services (MISS): 4th Floor, A Building.
+- AUF Bookstore: 1st Floor, A Building (Beside Cabalen Canteen).
+- Cabalen Canteen: 1st Floor, A Building.
+- Our Lady of Grace Chapel: Beside Finance Office / Angeles Hall.
+
+Main Library / Our Lady of Lourdes Hall:
+- Learning Commons & Main Library: Our Lady of Lourdes Hall (Beside Quad A).
+
+Information Technology Training Center (ITTC) / IT Building:
+- University Health Services (UHS Clinic): 1st Floor, IT Building.
+- ITTC Computer Training Center: IT Building.
+
+SL Building & SA Building (San Lorenzo & San Agustin Halls):
+- College of Nursing (CON): SA and SL Buildings.
+- College of Medical Professionals (CAMP): SL and SA Buildings.
+
+Emmanuel Angeles Building (EA Building):
+- Guidance Counselor Office (EA Annex): Room EYA-101, EA Building.
+- EA Clinic: 1st Floor, EA Building.
+- College of Computer Studies (CCS): EA Building.
+- College of Engineering and Architecture (CEA): EA Building.
+- College of Criminal Justice Education (CCJE): EA Building.
+- Faculty Offices: CCS, CCJE, Social Studies, and CEA Faculties are in the EA Building.
+- EA Canteen: 1st Floor, EA Building.
+
+Professional Schools Building (PS Building):
+- College of Business and Accountancy (CBA) & CBA HRM Laboratory: PS Building.
+- College of Arts and Sciences (CAS): PS Building.
+- School of Law: PS Building.
+- Graduate School: PS Building.
+- Confucius Institute at AUF (CI-AUF): 1st Floor, PS Building.
+- CI-AUF Language Laboratory: 1st Floor, PS Building.
+- St. John Paul II Halls: Rooms 308-309, 3rd Floor, PS Building.
+- PS Library / Law Library: 3rd Floor, PS Building.
+- PS Canteen: 1st Floor, PS Building.
+
+AUF Sports and Cultural Center (SCC):
+- 1st Floor: Classrooms for College of Nursing (CON) and College of Education (CED).
+- 2nd Floor: Track and Field.
+- 3rd Floor: Main Sports Arena.</textarea>
+    </details>
+
+    <div class="ask-row">
+      <input type="text" id="question" placeholder="e.g. Where is guidance? or Where is the clinic?">
+      <button id="ask">Search</button>
+    </div>
+
+    <div class="examples">
+      <button data-q="Where is the Guidance Counselor?">Guidance Office</button>
+      <button data-q="Where is the clinic?">Clinics</button>
+      <button data-q="Where is the Registrar's Office?">Registrar</button>
+      <button data-q="Where is CCS?">CCS</button>
+      <button data-q="Where is the Cashier?">Cashier</button>
+      <button data-q="Where is the canteen?">Canteens</button>
+      <button data-q="Where is the library?">Libraries</button>
+    </div>
+
+    <div id="status">Loading model... Please wait.</div>
+
+    <div class="answer-card" id="answerCard">
+      <div class="location-header" id="locationTitle">Location Found</div>
+      <div class="details" id="answerDetails"></div>
+    </div>
+  </section>
+
+  <!-- MAP PANEL -->
+  <section class="panel map-panel">
+    <div class="map-title">
+      <span class="label">AUF Campus Map</span>
+      <span class="showing" id="showing">Select or search an office</span>
+    </div>
+
+    <svg id="campusmap" viewBox="0 0 480 440" xmlns="http://www.w3.org/2000/svg">
+      <!-- ROAD -->
+      <rect x="10" y="80" width="460" height="22" fill="#808B96"/>
+      <line x1="10" y1="91" x2="470" y2="91" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="6 4"/>
+      
+      <!-- Crosswalk Yellow Lines -->
+      <line x1="225" y1="80" x2="225" y2="102" stroke="#FFC72C" stroke-width="3"/>
+      <line x1="233" y1="80" x2="233" y2="102" stroke="#FFC72C" stroke-width="3"/>
+
+      <!-- Road Labels -->
+      <text x="15" y="73" font-size="7.5" fill="#566573" font-weight="700">◄ ABACAN BRIDGE / MARISOL</text>
+      <text x="465" y="73" font-size="7.5" fill="#566573" font-weight="700" text-anchor="end">ANGELES CITY INTERSECTION ►</text>
+
+      <!-- NORTH SIDE BUILDINGS -->
+      <g class="bldg" data-key="ps">
+        <rect x="190" y="12" width="90" height="42" rx="3" fill="#4B6EFF"/>
+        <text x="235" y="30" text-anchor="middle" font-size="7.5" fill="#FFFFFF">PROFESSIONAL</text>
+        <text x="235" y="39" text-anchor="middle" font-size="7.5" fill="#FFFFFF">SCHOOLS (PS) BLDG</text>
+      </g>
+
+      <g class="bldg" data-key="ea">
+        <rect x="310" y="12" width="90" height="42" rx="3" fill="#B26BFF"/>
+        <text x="355" y="30" text-anchor="middle" font-size="7.5" fill="#FFFFFF">EMMANUEL</text>
+        <text x="355" y="39" text-anchor="middle" font-size="7.5" fill="#FFFFFF">ANGELES (EA) BLDG</text>
+      </g>
+
+      <!-- SOUTH SIDE BUILDINGS -->
+      <g class="bldg" data-key="main_entrance">
+        <rect x="20" y="112" width="125" height="22" rx="2" fill="#FF8833"/>
+        <text x="82" y="126" text-anchor="middle" font-size="7.5" fill="#FFFFFF">MAIN ENTRANCE</text>
+      </g>
+
+      <g class="bldg" data-key="a_bldg">
+        <polygon points="20,137 145,137 145,260 120,260 120,160 20,160" fill="#FFB366"/>
+        <text x="70" y="151" text-anchor="middle" font-size="8" fill="#5C2C00">A BLDG</text>
+      </g>
+
+      <g class="bldg" data-key="sidegate">
+        <rect x="20" y="163" width="22" height="97" rx="2" fill="#FFDE59"/>
+        <text x="31" y="215" text-anchor="middle" font-size="6.5" fill="#5C4000" transform="rotate(-90 31 215)">SIDEGATE / SILUNGAN</text>
+      </g>
+
+      <g class="bldg" data-key="quad_a">
+        <rect x="45" y="163" width="72" height="97" rx="2" fill="#E2E8F0" stroke="#CBD5E1"/>
+        <text x="81" y="215" text-anchor="middle" font-size="8" fill="#475569">QUAD A</text>
+      </g>
+
+      <g class="bldg" data-key="library">
+        <rect x="20" y="263" width="125" height="45" rx="2" fill="#B0F26D"/>
+        <text x="82" y="289" text-anchor="middle" font-size="8" fill="#1E4620">MAIN LIBRARY</text>
+      </g>
+
+      <g class="bldg" data-key="sa_bldg">
+        <rect x="20" y="311" width="125" height="42" rx="2" fill="#70E000"/>
+        <text x="82" y="336" text-anchor="middle" font-size="8" fill="#FFFFFF">SA BLDG</text>
+      </g>
+
+      <g class="bldg" data-key="sl_bldg">
+        <rect x="20" y="356" width="125" height="42" rx="2" fill="#38B000"/>
+        <text x="82" y="381" text-anchor="middle" font-size="8" fill="#FFFFFF">SL BLDG</text>
+      </g>
+
+      <g class="bldg" data-key="medical">
+        <rect x="155" y="112" width="130" height="148" rx="3" fill="#48CAE4"/>
+        <text x="220" y="180" text-anchor="middle" font-size="8.5" fill="#004E64">AUF MEDICAL CENTER</text>
+      </g>
+
+      <g class="bldg" data-key="parking">
+        <rect x="155" y="263" width="60" height="90" rx="2" fill="#FF9E00"/>
+        <text x="185" y="303" text-anchor="middle" font-size="7.5" fill="#FFFFFF">PARKING</text>
+        <text x="185" y="313" text-anchor="middle" font-size="7.5" fill="#FFFFFF">LOT</text>
+      </g>
+
+      <g class="bldg" data-key="it_bldg">
+        <rect x="155" y="356" width="130" height="42" rx="2" fill="#52B788"/>
+        <text x="220" y="381" text-anchor="middle" font-size="8" fill="#FFFFFF">IT BLDG</text>
+      </g>
+
+      <g class="bldg" data-key="jollibee">
+        <rect x="295" y="112" width="65" height="65" rx="3" fill="#FF4D4D"/>
+        <text x="327" y="148" text-anchor="middle" font-size="8" fill="#FFFFFF">JOLLIBEE</text>
+      </g>
+
+      <g class="bldg" data-key="scc">
+        <rect x="370" y="112" width="75" height="210" rx="3" fill="#4EA8DE"/>
+        <text x="407" y="200" text-anchor="middle" font-size="7.5" fill="#FFFFFF">SPORTS AND</text>
+        <text x="407" y="210" text-anchor="middle" font-size="7.5" fill="#FFFFFF">CULTURAL</text>
+        <text x="407" y="220" text-anchor="middle" font-size="7.5" fill="#FFFFFF">CENTER</text>
+        <text x="407" y="230" text-anchor="middle" font-size="7.5" fill="#FFFFFF">(SCC)</text>
+      </g>
+    </svg>
+
+    <div class="legend">
+      <span>Angeles University Foundation Layout</span>
+      <span>● Highlighted Location(s)</span>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
+<script>
+  const statusEl = document.getElementById('status');
+  const askBtn = document.getElementById('ask');
+  const questionEl = document.getElementById('question');
+  const answerCard = document.getElementById('answerCard');
+  const locationTitle = document.getElementById('locationTitle');
+  const answerDetails = document.getElementById('answerDetails');
+  const contextEl = document.getElementById('context');
+  const showingEl = document.getElementById('showing');
+
+  // INDIVIDUAL SPECIFIC OFFICES
+  const SPECIFIC_OFFICES = [
+    {
+      name: 'Office of the University Registrar and Admissions',
+      key: 'a_bldg',
+      words: ['registrar', 'registration', 'a-202', 'a-203'],
+      location: 'Rooms A-202 & A-203, 2nd Floor, A Building (Angeles Hall)'
+    },
+    {
+      name: 'Admissions Office Window',
+      key: 'a_bldg',
+      words: ['admissions window', 'a-310', 'admission window'],
+      location: 'Room A-310, 3rd Floor, A Building (Angeles Hall)'
+    },
+    {
+      name: 'AUF Cashier / Accounting Office',
+      key: 'a_bldg',
+      words: ['cashier', 'accounting', 'finance', 'tuition', 'payment'],
+      location: 'Ground Floor, Angeles Hall (Beside Our Lady of Grace Chapel)'
+    },
+    {
+      name: 'Office of Student Affairs (OSAFA)',
+      key: 'a_bldg',
+      words: ['osafa', 'student affairs'],
+      location: '2nd Floor, A Building (Angeles Hall)'
+    },
+    {
+      name: 'Office of the VP for Research & Innovation (OVPRI)',
+      key: 'a_bldg',
+      words: ['ovpri', 'research and innovation', 'research office'],
+      location: '1st Floor, A Building (Angeles Hall)'
+    },
+    {
+      name: 'Management Information Systems & Services (MISS)',
+      key: 'a_bldg',
+      words: ['miss', 'management information systems', 'it support'],
+      location: '4th Floor, A Building (Angeles Hall)'
+    },
+    {
+      name: 'AUF Bookstore',
+      key: 'a_bldg',
+      words: ['bookstore', 'books', 'uniform'],
+      location: '1st Floor, A Building (Beside Cabalen Canteen)'
+    },
+    {
+      name: 'Our Lady of Grace Chapel',
+      key: 'a_bldg',
+      words: ['chapel', 'church'],
+      location: 'Ground Floor, Angeles Hall (Beside Finance Office)'
+    },
+    {
+      name: 'ITTC Computer Training Center',
+      key: 'it_bldg',
+      words: ['ittc', 'computer training center', 'it building'],
+      location: 'IT Building'
+    },
+    {
+      name: 'College of Computer Studies (CCS)',
+      key: 'ea',
+      words: ['ccs', 'computer studies', 'it department', 'computer science'],
+      location: 'Emmanuel Angeles (EA) Building'
+    },
+    {
+      name: 'College of Engineering and Architecture (CEA)',
+      key: 'ea',
+      words: ['cea', 'engineering', 'architecture'],
+      location: 'Emmanuel Angeles (EA) Building'
+    },
+    {
+      name: 'College of Criminal Justice Education (CCJE)',
+      key: 'ea',
+      words: ['ccje', 'criminology', 'criminal justice'],
+      location: 'Emmanuel Angeles (EA) Building'
+    },
+    {
+      name: 'College of Business and Accountancy (CBA)',
+      key: 'ps',
+      words: ['cba', 'business', 'accountancy', 'hrm lab'],
+      location: 'Professional Schools (PS) Building'
+    },
+    {
+      name: 'College of Arts and Sciences (CAS)',
+      key: 'ps',
+      words: ['cas', 'arts and sciences', 'arts & sciences'],
+      location: 'Professional Schools (PS) Building'
+    },
+    {
+      name: 'School of Law',
+      key: 'ps',
+      words: ['school of law', 'law school'],
+      location: 'Professional Schools (PS) Building'
+    },
+    {
+      name: 'Graduate School',
+      key: 'ps',
+      words: ['graduate school', 'masteral', 'doctorate'],
+      location: 'Professional Schools (PS) Building'
+    },
+    {
+      name: 'Confucius Institute at AUF (CI-AUF)',
+      key: 'ps',
+      words: ['confucius', 'ci-auf', 'chinese language'],
+      location: '1st Floor, Professional Schools (PS) Building'
+    },
+    {
+      name: 'St. John Paul II Halls',
+      key: 'ps',
+      words: ['john paul', 'john paul ii', 'room 308', 'room 309'],
+      location: 'Rooms 308-309, 3rd Floor, Professional Schools (PS) Building'
+    },
+    {
+      name: 'College of Nursing (CON)',
+      key: 'sa_bldg',
+      words: ['nursing', 'con'],
+      location: 'SA Building (San Agustin Hall) & SL Building (San Lorenzo Hall)'
+    },
+    {
+      name: 'College of Medical Professionals (CAMP)',
+      key: 'sa_bldg',
+      words: ['camp', 'medical professionals', 'medtech', 'physical therapy'],
+      location: 'SL Building (San Lorenzo Hall) & SA Building (San Agustin Hall)'
+    }
+  ];
+
+  // WHOLE BUILDINGS DIRECTORY
+  const BUILDINGS = [
+    {
+      key: 'ps',
+      name: 'Professional Schools (PS) Building',
+      words: ['ps building', 'ps bldg', 'professional schools'],
+      summary: '<strong>Professional Schools (PS) Building Overview:</strong><br>• 1st Floor: Confucius Institute, Language Lab, PS Canteen<br>• 3rd Floor: PS Library / Law Library, St. John Paul II Halls<br>• Colleges: CAS, CBA, Law, Graduate School'
+    },
+    {
+      key: 'ea',
+      name: 'Emmanuel Angeles (EA) Building',
+      words: ['ea building', 'ea bldg', 'emmanuel angeles'],
+      summary: '<strong>Emmanuel Angeles (EA) Building Overview:</strong><br>• 1st Floor: EA Canteen, EA Clinic, EYA-101 Guidance Office<br>• Colleges: CCS, CEA, CCJE<br>• Faculty Offices for CCS, CCJE, CEA, Social Studies'
+    },
+    {
+      key: 'a_bldg',
+      name: 'A Building (Angeles Hall)',
+      words: ['a building', 'a bldg', 'angeles hall'],
+      summary: '<strong>A Building (Angeles Hall) Overview:</strong><br>• 1st Floor: Cabalen Canteen, Bookstore, OVPRI, Cashier<br>• 2nd Floor: OSAFA, Registrar & Admissions<br>• 3rd Floor: Main Guidance Office (A-303), Admissions Window (A-310)<br>• 4th Floor: MISS'
+    },
+    {
+      key: 'sa_bldg',
+      name: 'SA Building (San Agustin Hall)',
+      words: ['sa building', 'sa bldg', 'san agustin'],
+      summary: '<strong>SA Building:</strong> Houses College of Nursing (CON) and College of Medical Professionals (CAMP).'
+    },
+    {
+      key: 'sl_bldg',
+      name: 'SL Building (San Lorenzo Hall)',
+      words: ['sl building', 'sl bldg', 'san lorenzo'],
+      summary: '<strong>SL Building:</strong> Houses College of Nursing (CON) and College of Medical Professionals (CAMP).'
+    },
+    {
+      key: 'it_bldg',
+      name: 'IT Building (ITTC)',
+      words: ['it building', 'it bldg'],
+      summary: '<strong>IT Building:</strong> University Health Services (UHS Clinic) on 1st Floor & ITTC Training Center.'
+    },
+    {
+      key: 'scc',
+      name: 'AUF Sports and Cultural Center (SCC)',
+      words: ['scc', 'sports', 'cultural center', 'arena', 'track', 'gym'],
+      summary: '<strong>SCC:</strong> Classrooms (1st Flr), Track & Field (2nd Flr), Main Arena (3rd Flr).'
+    },
+    {
+      key: 'medical',
+      name: 'AUF Medical Center',
+      words: ['medical center', 'hospital', 'aufmc'],
+      summary: '<strong>AUF Medical Center:</strong> Main university hospital complex.'
+    },
+    {
+      key: 'jollibee',
+      name: 'Jollibee',
+      words: ['jollibee'],
+      summary: '<strong>Jollibee:</strong> Fast food outlet outside campus along MacArthur Highway.'
+    }
+  ];
+
+  // MULTI-LOCATION TRIGGERS
+  const CANTEEN_TRIGGERS = ['canteen', 'canteens', 'food', 'cafeteria', 'dining', 'eat', 'eating', 'cabalen'];
+  const LIBRARY_TRIGGERS = ['library', 'libraries', 'study hall', 'law library', 'learning commons'];
+  const CLINIC_TRIGGERS = ['clinic', 'clinics', 'health services', 'doctor', 'medical clinic', 'nurse clinic', 'uhs'];
+  const GUIDANCE_TRIGGERS = ['guidance', 'counselor', 'counseling', 'a-303', 'eya-101', 'eya 101', 'a 303'];
+
+  function highlightKeys(keys) {
+    document.querySelectorAll('.bldg').forEach(g => g.classList.remove('active'));
+    if (!keys || keys.length === 0) {
+      showingEl.textContent = 'Select or search an office';
+      return;
+    }
+    keys.forEach(k => {
+      const g = document.querySelector(`.bldg[data-key="${k}"]`);
+      if (g) g.classList.add('active');
+    });
+    showingEl.textContent = `Highlighted: ${keys.join(', ').toUpperCase()}`;
+  }
+
+  let model = null;
+
+  window.addEventListener('load', () => {
+    qna.load().then(m => {
+      model = m;
+      statusEl.textContent = 'Directory model ready. Ask any question below.';
+      askBtn.disabled = false;
+    }).catch(err => {
+      statusEl.textContent = 'Directory search active.';
+      askBtn.disabled = false;
+    });
+  });
+
+  async function processQuery() {
+    const q = questionEl.value.trim().toLowerCase();
+    const context = contextEl.value.trim();
+    if (!q) return;
+
+    askBtn.disabled = true;
+    statusEl.textContent = 'Searching campus directory…';
+
+    const isCanteenSearch = CANTEEN_TRIGGERS.some(trigger => q.includes(trigger));
+    const isLibrarySearch = LIBRARY_TRIGGERS.some(trigger => q.includes(trigger));
+    const isClinicSearch = CLINIC_TRIGGERS.some(trigger => q.includes(trigger));
+    const isGuidanceSearch = GUIDANCE_TRIGGERS.some(trigger => q.includes(trigger));
+
+    if (isCanteenSearch) {
+      highlightKeys(['a_bldg', 'ea', 'ps']);
+      locationTitle.textContent = 'Campus Canteens';
+      answerDetails.innerHTML = `
+        <p><strong>AUF Canteen Locations:</strong></p>
+        <ul>
+          <li><strong>Cabalen Canteen:</strong> 1st Floor, A Building (beside AUF Bookstore)</li>
+          <li><strong>EA Canteen:</strong> 1st Floor, Emmanuel Angeles (EA) Building</li>
+          <li><strong>PS Canteen:</strong> 1st Floor, Professional Schools (PS) Building</li>
+        </ul>
+      `;
+      answerCard.classList.add('show');
+      statusEl.textContent = 'Found 3 canteen locations!';
+    } else if (isLibrarySearch) {
+      highlightKeys(['library', 'ps']);
+      locationTitle.textContent = 'Campus Libraries';
+      answerDetails.innerHTML = `
+        <p><strong>AUF Library Locations:</strong></p>
+        <ul>
+          <li><strong>Main Library & Learning Commons:</strong> Our Lady of Lourdes Hall (beside Quad A)</li>
+          <li><strong>PS Library / Law Library:</strong> 3rd Floor, Professional Schools (PS) Building</li>
+        </ul>
+      `;
+      answerCard.classList.add('show');
+      statusEl.textContent = 'Found 2 library locations!';
+    } else if (isClinicSearch) {
+      highlightKeys(['it_bldg', 'ea']);
+      locationTitle.textContent = 'Campus Clinics';
+      answerDetails.innerHTML = `
+        <p><strong>AUF Clinic Locations:</strong></p>
+        <ul>
+          <li><strong>University Health Services (UHS Clinic):</strong> 1st Floor, IT Building</li>
+          <li><strong>EA Clinic:</strong> 1st Floor, Emmanuel Angeles (EA) Building</li>
+        </ul>
+      `;
+      answerCard.classList.add('show');
+      statusEl.textContent = 'Found 2 clinic locations!';
+    } else if (isGuidanceSearch) {
+      highlightKeys(['a_bldg', 'ea']);
+      locationTitle.textContent = 'Guidance Counselor Offices';
+      answerDetails.innerHTML = `
+        <p><strong>AUF Guidance Counselor Locations:</strong></p>
+        <ul>
+          <li><strong>Main Guidance Office:</strong> Room A-303, AUF Main A Building</li>
+          <li><strong>EA Guidance Office:</strong> Room EYA-101, 1st Floor, Emmanuel Angeles (EA) Building</li>
+        </ul>
+      `;
+      answerCard.classList.add('show');
+      statusEl.textContent = 'Found 2 guidance office locations!';
+    } else {
+      // 1. Check if user searched for a SPECIFIC SINGLE OFFICE
+      const officeMatch = SPECIFIC_OFFICES.find(o => o.words.some(w => q.includes(w)));
+      
+      if (officeMatch) {
+        highlightKeys([officeMatch.key]);
+        locationTitle.textContent = officeMatch.name;
+        answerDetails.innerHTML = `<p><strong>Location:</strong> ${officeMatch.location}</p>`;
+        answerCard.classList.add('show');
+        statusEl.textContent = 'Found location!';
+      } else {
+        // 2. Check if user searched for a WHOLE BUILDING
+        const bldgMatch = BUILDINGS.find(b => b.words.some(w => q.includes(w)));
+        if (bldgMatch) {
+          highlightKeys([bldgMatch.key]);
+          locationTitle.textContent = bldgMatch.name;
+          answerDetails.innerHTML = bldgMatch.summary;
+          answerCard.classList.add('show');
+          statusEl.textContent = 'Found building!';
+        } else if (model && context) {
+          // 3. Fallback to TensorFlow Q&A model
+          try {
+            const answers = await model.findAnswers(q, context);
+            if (answers && answers.length > 0) {
+              const ansText = answers[0].text;
+              locationTitle.textContent = 'Directory Answer';
+              answerDetails.innerHTML = `<p><strong>Location:</strong> ${ansText}</p>`;
+              answerCard.classList.add('show');
+
+              const secMatch = BUILDINGS.find(b => b.words.some(w => ansText.toLowerCase().includes(w)));
+              if (secMatch) highlightKeys([secMatch.key]);
+              statusEl.textContent = 'Found!';
+            } else {
+              answerCard.classList.remove('show');
+              highlightKeys([]);
+              statusEl.textContent = 'No matching location found.';
+            }
+          } catch (e) {
+            statusEl.textContent = 'Search failed.';
+          }
+        }
+      }
+    }
+
+    askBtn.disabled = false;
+  }
+
+  askBtn.addEventListener('click', processQuery);
+  questionEl.addEventListener('keyup', e => { if (e.key === 'Enter') processQuery(); });
+
+  document.querySelectorAll('.examples button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      questionEl.value = btn.dataset.q;
+      processQuery();
+    });
+  });
+</script>
+
+</body>
+</html>
