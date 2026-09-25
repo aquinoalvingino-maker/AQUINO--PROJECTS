@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Purchase Orders | Shop 4 More Furniture</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+  <div class="logo">
+
+    <img src="assets/ICON.jpg" class="logo-img" alt="Shop 4 More Logo">
+
+    <h3>SHOP 4 MORE</h3>
+
+    <small>Furniture Inventory</small>
+
+</div>
+
+<ul>
+
+    <li>
+        <a href="dashboard.html">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="products.html">
+            <i class="fas fa-couch"></i>
+            <span>Products</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="inventory.html">
+            <i class="fas fa-boxes"></i>
+            <span>Inventory</span>
+        </a>
+    </li>
+
+   <li>
+        <a href="stockin.html">
+            <i class="fas fa-arrow-down"></i>
+            <span>Stock In</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="stockout.html">
+            <i class="fas fa-arrow-up"></i>
+            <span>Stock Out</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="suppliers.html">
+            <i class="fas fa-truck"></i>
+            <span>Suppliers</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="customers.html">
+            <i class="fas fa-users"></i>
+            <span>Customers</span>
+        </a>
+    </li>
+
+    <li class="active">
+        <a href="purchaseorders.html">
+            <i class="fas fa-file-invoice"></i>
+            <span>Purchase Orders</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="receiving.html">
+            <i class="fas fa-dolly"></i>
+            <span>Goods Receiving</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="delivery.html">
+            <i class="fas fa-truck-ramp-box"></i>
+            <span>Delivery Receipts</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="reports.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Reports</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="abcanalysis.html">
+            <i class="fas fa-chart-pie"></i>
+            <span>ABC Analysis</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="settings.html">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
+    </li>
+
+</ul>
+
+</aside>
+
+<!-- Main -->
+
+<main class="content">
+
+<div class="topbar">
+
+<h2>Purchase Orders</h2>
+
+<div class="search">
+
+<input type="text" id="poSearch" placeholder="Search Purchase Order">
+
+<button>
+
+<i class="fas fa-search"></i>
+
+</button>
+
+</div>
+
+</div>
+
+<div class="card mt-4 p-4">
+
+<div class="d-flex justify-content-between mb-3">
+
+<h4>Purchase Order List</h4>
+
+<button class="btn btn-maroon">
+
+<i class="fas fa-plus"></i>
+
+Create Purchase Order
+
+</button>
+
+</div>
+
+<table class="table table-hover" id="poTable">
+
+<thead>
+
+<tr>
+
+<th>PO No.</th>
+<th>Supplier</th>
+<th>Order Date</th>
+<th>Expected Delivery</th>
+<th>Total Amount</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>PO-0001</td>
+<td>ABC Furniture</td>
+<td>Aug 01, 2026</td>
+<td>Aug 05, 2026</td>
+<td>₱120,000</td>
+
+<td>
+
+<span class="badge bg-success">
+
+Approved
+
+</span>
+
+</td>
+
+<td>
+
+<button class="btn btn-primary btn-sm">
+
+<i class="fas fa-eye"></i>
+
+</button>
+
+<button class="btn btn-success btn-sm">
+
+<i class="fas fa-print"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>PO-0002</td>
+<td>Modern Home</td>
+<td>Aug 02, 2026</td>
+<td>Aug 06, 2026</td>
+<td>₱58,000</td>
+
+<td>
+
+<span class="badge bg-warning text-dark">
+
+Pending
+
+</span>
+
+</td>
+
+<td>
+
+<button class="btn btn-primary btn-sm">
+
+<i class="fas fa-eye"></i>
+
+</button>
+
+<button class="btn btn-success btn-sm">
+
+<i class="fas fa-print"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>PO-0003</td>
+<td>Comfort Seating</td>
+<td>Aug 03, 2026</td>
+<td>Aug 08, 2026</td>
+<td>₱39,500</td>
+
+<td>
+
+<span class="badge bg-danger">
+
+Cancelled
+
+</span>
+
+</td>
+
+<td>
+
+<button class="btn btn-primary btn-sm">
+
+<i class="fas fa-eye"></i>
+
+</button>
+
+<button class="btn btn-success btn-sm">
+
+<i class="fas fa-print"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- Summary Cards -->
+
+<div class="row mt-4">
+
+<div class="col-md-3">
+
+<div class="card dashboard-card">
+
+<i class="fas fa-file-invoice"></i>
+
+<h3>25</h3>
+
+<p>Total Purchase Orders</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card dashboard-card">
+
+<i class="fas fa-check-circle"></i>
+
+<h3>18</h3>
+
+<p>Approved</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card dashboard-card">
+
+<i class="fas fa-clock"></i>
+
+<h3>5</h3>
+
+<p>Pending</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card dashboard-card">
+
+<i class="fas fa-times-circle"></i>
+
+<h3>2</h3>
+
+<p>Cancelled</p>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+const poSearch=document.getElementById("poSearch");
+
+poSearch.addEventListener("keyup",function(){
+
+let value=this.value.toLowerCase();
+
+let rows=document.querySelectorAll("#poTable tbody tr");
+
+rows.forEach(function(row){
+
+row.style.display=row.innerText.toLowerCase().includes(value)
+
+? ""
+
+: "none";
+
+});
+
+});
+
+</script>
+
+</body>
+</html>

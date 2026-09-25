@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Suppliers | Shop 4 More Furniture</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+  <div class="logo">
+
+    <img src="assets/ICON.jpg" class="logo-img" alt="Shop 4 More Logo">
+
+    <h3>SHOP 4 MORE</h3>
+
+    <small>Furniture Inventory</small>
+
+</div>
+
+<ul>
+
+    <li>
+        <a href="dashboard.html">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="products.html">
+            <i class="fas fa-couch"></i>
+            <span>Products</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="inventory.html">
+            <i class="fas fa-boxes"></i>
+            <span>Inventory</span>
+        </a>
+    </li>
+
+   <li >
+        <a href="stockin.html">
+            <i class="fas fa-arrow-down"></i>
+            <span>Stock In</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="stockout.html">
+            <i class="fas fa-arrow-up"></i>
+            <span>Stock Out</span>
+        </a>
+    </li>
+
+    <li class="active">
+        <a href="suppliers.html">
+            <i class="fas fa-truck"></i>
+            <span>Suppliers</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="customers.html">
+            <i class="fas fa-users"></i>
+            <span>Customers</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="purchaseorders.html">
+            <i class="fas fa-file-invoice"></i>
+            <span>Purchase Orders</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="receiving.html">
+            <i class="fas fa-dolly"></i>
+            <span>Goods Receiving</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="delivery.html">
+            <i class="fas fa-truck-ramp-box"></i>
+            <span>Delivery Receipts</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="reports.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Reports</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="abcanalysis.html">
+            <i class="fas fa-chart-pie"></i>
+            <span>ABC Analysis</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="settings.html">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
+    </li>
+
+</ul>
+</aside>
+
+<!-- Main -->
+
+<main class="content">
+
+<div class="topbar">
+
+<h2>Supplier Management</h2>
+
+<div class="search">
+
+<input type="text" id="supplierSearch" placeholder="Search Supplier">
+
+<button>
+
+<i class="fas fa-search"></i>
+
+</button>
+
+</div>
+
+</div>
+
+<div class="card mt-4 p-4">
+
+<div class="d-flex justify-content-between mb-3">
+
+<h4>Supplier Directory</h4>
+
+<button class="btn btn-maroon">
+
+<i class="fas fa-plus"></i>
+
+Add Supplier
+
+</button>
+
+</div>
+
+<table class="table table-hover" id="supplierTable">
+
+<thead>
+
+<tr>
+
+<th>Supplier ID</th>
+<th>Company Name</th>
+<th>Contact Person</th>
+<th>Phone</th>
+<th>Email</th>
+<th>Address</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>SUP-001</td>
+<td>ABC Furniture</td>
+<td>Juan Dela Cruz</td>
+<td>09171234567</td>
+<td>abc@email.com</td>
+<td>Angeles City</td>
+
+<td>
+
+<span class="badge bg-success">
+
+Active
+
+</span>
+
+</td>
+
+<td>
+
+<button class="btn btn-primary btn-sm">
+
+<i class="fas fa-edit"></i>
+
+</button>
+
+<button class="btn btn-danger btn-sm">
+
+<i class="fas fa-trash"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>SUP-002</td>
+<td>Modern Home</td>
+<td>Maria Santos</td>
+<td>09181234567</td>
+<td>modern@email.com</td>
+<td>San Fernando</td>
+
+<td>
+
+<span class="badge bg-success">
+
+Active
+
+</span>
+
+</td>
+
+<td>
+
+<button class="btn btn-primary btn-sm">
+
+<i class="fas fa-edit"></i>
+
+</button>
+
+<button class="btn btn-danger btn-sm">
+
+<i class="fas fa-trash"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>SUP-003</td>
+<td>Comfort Seating</td>
+<td>Pedro Reyes</td>
+<td>09192345678</td>
+<td>comfort@email.com</td>
+<td>Mabalacat</td>
+
+<td>
+
+<span class="badge bg-warning text-dark">
+
+Inactive
+
+</span>
+
+</td>
+
+<td>
+
+<button class="btn btn-primary btn-sm">
+
+<i class="fas fa-edit"></i>
+
+</button>
+
+<button class="btn btn-danger btn-sm">
+
+<i class="fas fa-trash"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+const supplierSearch=document.getElementById("supplierSearch");
+
+supplierSearch.addEventListener("keyup",function(){
+
+let value=this.value.toLowerCase();
+
+let rows=document.querySelectorAll("#supplierTable tbody tr");
+
+rows.forEach(function(row){
+
+row.style.display=row.innerText.toLowerCase().includes(value)
+
+? ""
+
+: "none";
+
+});
+
+});
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stock Out | Shop 4 More Furniture</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+  <div class="logo">
+
+    <img src="assets/ICON.jpg" class="logo-img" alt="Shop 4 More Logo">
+
+    <h3>SHOP 4 MORE</h3>
+
+    <small>Furniture Inventory</small>
+
+</div>
+
+<ul>
+
+    <li>
+        <a href="dashboard.html">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="products.html">
+            <i class="fas fa-couch"></i>
+            <span>Products</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="inventory.html">
+            <i class="fas fa-boxes"></i>
+            <span>Inventory</span>
+        </a>
+    </li>
+
+   <li>
+        <a href="stockin.html">
+            <i class="fas fa-arrow-down"></i>
+            <span>Stock In</span>
+        </a>
+    </li>
+
+    <li class="active">
+        <a href="stockout.html">
+            <i class="fas fa-arrow-up"></i>
+            <span>Stock Out</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="suppliers.html">
+            <i class="fas fa-truck"></i>
+            <span>Suppliers</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="customers.html">
+            <i class="fas fa-users"></i>
+            <span>Customers</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="purchaseorders.html">
+            <i class="fas fa-file-invoice"></i>
+            <span>Purchase Orders</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="receiving.html">
+            <i class="fas fa-dolly"></i>
+            <span>Goods Receiving</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="delivery.html">
+            <i class="fas fa-truck-ramp-box"></i>
+            <span>Delivery Receipts</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="reports.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Reports</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="abcanalysis.html">
+            <i class="fas fa-chart-pie"></i>
+            <span>ABC Analysis</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="settings.html">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
+    </li>
+
+</ul>
+</aside>
+
+<!-- Main -->
+
+<main class="content">
+
+<div class="topbar">
+
+<h2>Stock Out</h2>
+
+</div>
+
+<div class="card mt-4 p-4">
+
+<h4 class="mb-4">
+
+<i class="fas fa-arrow-up"></i>
+
+Release Inventory
+
+</h4>
+
+<form>
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label>Transaction No.</label>
+
+<input class="form-control" value="SO-0001">
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Date</label>
+
+<input type="date" class="form-control">
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Customer</label>
+
+<select class="form-control">
+
+<option>Walk-in Customer</option>
+
+<option>Hotel Royale</option>
+
+<option>ABC Construction</option>
+
+<option>XYZ Office</option>
+
+</select>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Released By</label>
+
+<input class="form-control">
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Product</label>
+
+<select class="form-control">
+
+<option>Wooden Sofa</option>
+
+<option>Dining Table</option>
+
+<option>Office Chair</option>
+
+<option>Queen Bed</option>
+
+<option>Bookshelf</option>
+
+</select>
+
+</div>
+
+<div class="col-md-3 mb-3">
+
+<label>Quantity</label>
+
+<input type="number" class="form-control">
+
+</div>
+
+<div class="col-md-3 mb-3">
+
+<label>Unit Price</label>
+
+<input class="form-control" placeholder="₱0.00">
+
+</div>
+
+<div class="col-md-12">
+
+<label>Remarks</label>
+
+<textarea class="form-control" rows="4"></textarea>
+
+</div>
+
+</div>
+
+<div class="mt-4">
+
+<button class="btn btn-maroon">
+
+<i class="fas fa-save"></i>
+
+Save Transaction
+
+</button>
+
+<button class="btn btn-secondary">
+
+Clear
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+<div class="card mt-4 p-4">
+
+<h4>Recent Stock Out Transactions</h4>
+
+<table class="table table-hover">
+
+<thead>
+
+<tr>
+
+<th>No.</th>
+
+<th>Date</th>
+
+<th>Customer</th>
+
+<th>Product</th>
+
+<th>Qty</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>SO-0001</td>
+
+<td>08/04/2026</td>
+
+<td>Hotel Royale</td>
+
+<td>Wooden Sofa</td>
+
+<td>5</td>
+
+<td><span class="badge bg-success">Completed</span></td>
+
+</tr>
+
+<tr>
+
+<td>SO-0002</td>
+
+<td>08/03/2026</td>
+
+<td>ABC Construction</td>
+
+<td>Office Chair</td>
+
+<td>8</td>
+
+<td><span class="badge bg-success">Completed</span></td>
+
+</tr>
+
+<tr>
+
+<td>SO-0003</td>
+
+<td>08/02/2026</td>
+
+<td>Walk-in Customer</td>
+
+<td>Dining Table</td>
+
+<td>2</td>
+
+<td><span class="badge bg-warning text-dark">Pending</span></td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</main>
+
+</div>
+
+</body>
+
+</html>
