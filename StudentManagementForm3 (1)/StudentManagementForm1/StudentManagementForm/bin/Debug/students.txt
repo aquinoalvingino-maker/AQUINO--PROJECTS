@@ -1,0 +1,3 @@
+Name: Gino Aquino, Age: 20, Subjects: Mathematics
+Name: Sabrina Carpenter, Age: 21, Subjects: OOP10
+Air Supply,220,OOP10

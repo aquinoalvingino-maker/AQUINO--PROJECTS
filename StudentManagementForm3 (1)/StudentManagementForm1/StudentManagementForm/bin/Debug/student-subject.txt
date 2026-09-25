@@ -1,0 +1,6 @@
+Doja Cat,Science,Study of the World,30000
+Student Sample,Mathematics,Study of Numbers,25000
+Student,Mathematics,Study of Numbers,25000
+Gino Aquino,Mathematics,Study of Numbers,25000
+Sabrina Carpenter,OOP10,Object Oriented Programming,10000
+Air Supply,OOP10,Object Oriented Programming,10000

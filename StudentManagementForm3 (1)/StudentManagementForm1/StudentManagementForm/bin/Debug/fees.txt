@@ -1,0 +1,5 @@
+Doja Cat,5000,12/1/2024
+Student Sample,5900,12/1/2024
+Gino Aquino,40000,12/1/2024
+Sabrina Carpenter,6000,12/2/2024
+Air Supply,10000,12/3/2024

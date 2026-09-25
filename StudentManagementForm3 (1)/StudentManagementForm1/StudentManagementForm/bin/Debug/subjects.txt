@@ -1,0 +1,9 @@
+Mathematics,Study of Numbers,25000
+Science,Study of the World,30000
+Programming,Code code code,100000
+History,Study of the Past,45000
+English,Study of Language and Speech,32000
+CCS40,Data Structures and Algorithms,50000
+OOP10,Object Oriented Programming,10000
+RRES,Religions, Religious Experiences, and Spirituality,20000
+ARTAP,Art Appreciation,60000
